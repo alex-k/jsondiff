@@ -1,0 +1,26 @@
+{
+  "name": "alex-k/jsondiff",
+  "description": "test assignment for unity",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Alexei Kochetov",
+      "email": "alex@kochetov.com"
+    }
+  ],
+  "config": {
+    "optimize-autoloader": true
+  },
+  "require": {
+    "php": ">=5.4"
+  },
+  "require-dev": {
+    "codeception/codeception": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "JsonDiff\\": "src/"
+    }
+  }
+}
