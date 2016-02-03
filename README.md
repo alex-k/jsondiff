@@ -6,17 +6,17 @@
   them.
 
 
-** How to run **
+*How to run*
   - download/clone project
   - exec `php composer.phar install --no-dev` to bootstrap application (no external libraries, check composer.json)
   - exec `php scripts/json_diff.php`
 
-** How to run unit tests **
+*How to run unit tests*
   - exec `php composer.phar install` to download codeception test suit
   - exec `./vendor/bin/codecept run unit`
 
 
-** Data structure and patterns **
+*Data structure and patterns*
 
   I've choose to introduce Tree-kind ValueObject to parse json-encoded strings into. Tree Objects knows nothing about jsons, it's initialized from Array.
   Every Tree VO contains hash of values, values could be primitives or objects of TreeVO class, which reflects subtrees.
