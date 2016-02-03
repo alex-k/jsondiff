@@ -6,10 +6,9 @@
  * Time: 10:23 PM
  */
 
-namespace Comparator;
+namespace JsonDiff\Comparator;
 
 
-use JsonDiff\Comparator\DiffTreeInterface;
 use JsonDiff\ValueObject\TreeInterface;
 use JsonDiff\ValueObject\Json as JsonObject;
 
