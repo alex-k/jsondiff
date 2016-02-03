@@ -6,6 +6,10 @@
   them.
 
 
+*Requirements*
+  You will need php command-line interpreter installed. Tu install it on ubuntu please exec `apt-get install php5-cli`
+  For other systems please look at http://php.net/manual/en/install.php
+
 *How to run*
   - download/clone project
   - exec `php composer.phar install --no-dev` to bootstrap application (no external libraries, check composer.json)
