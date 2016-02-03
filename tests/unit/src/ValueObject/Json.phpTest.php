@@ -32,14 +32,14 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
         $json = Json::fromString('{"a":1,"b":2}');
 
-        $this->assertEquals(["a","b"],$json->getKeys());
+        $this->assertEquals(["a", "b"], $json->getKeys());
 
     }
 
     public function testGetKey()
     {
         $json = Json::fromString('{"a":1,"b":2}');
-        $this->assertEquals(2,$json->getKey("b"));
+        $this->assertEquals(2, $json->getKey("b"));
     }
 
     /**
@@ -60,6 +60,20 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function testGetHash()
+    {
+        $json = Json::fromString('{"b":2}');
+        $this->assertEquals("5c7f4cae807b5df50033029edcd1c69d", $json->getHash());
+    }
+
+    public function testSetValue()
+    {
+        $json = Json::fromString('{"a":1,"b":2}');
+        $json->setValue("c", 4);
+        $this->assertEquals(4, $json->getKey("c"));
+    }
+
+
     public function testSubTreeCreation()
     {
 
@@ -73,8 +87,8 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, $json->getKey("c")->getKey("c"));
         $this->assertEquals($json->getKey("b")->getHash(), $json->getKey("c")->getHash());
 
-        $this->assertEquals(json_decode($string,true),$json->toArray());
-        $this->assertEquals($string,$json->toString());
+        $this->assertEquals(json_decode($string, true), $json->toArray());
+        $this->assertEquals($string, $json->toString());
     }
 
 }
