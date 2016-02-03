@@ -59,7 +59,7 @@ class TreeTest extends \PHPUnit_Framework_TestCase
     public function testToNullArray()
     {
         $tree = Tree::fromArray([]);
-        $this->assertNull($tree->toArray();
+        $this->assertNull($tree->toArray());
     }
 
 
