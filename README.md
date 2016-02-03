@@ -20,6 +20,7 @@
   - exec `php composer.phar install` to download codeception test suit
   - exec `./vendor/bin/codecept run unit`
 
+  You may need to install php5-curl for codeception on some systems (exec `apt-get install php5-curl` on ubuntu)
 
 **Data structure and patterns**
 
