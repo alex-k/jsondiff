@@ -57,6 +57,13 @@ class Json
         return $ret;
     }
 
+    public function setValue($key, $value)
+    {
+        $this->json[$key] = is_array($value) ? self::fromArray($value) : $value;
+
+        $this->reHash();
+    }
+
     public function getKeys()
     {
         return array_keys($this->json);
@@ -78,22 +85,7 @@ class Json
     }
 
 
-    public function setValue($key, $value)
-    {
-        $this->json[$key] = $value;
 
-        $hash = "";
-        foreach ($this->getKeys() as $key) {
-            $hash.=md5($key);
-            $value = $this->getKey($key);
-            if ($value instanceof Json) {
-                $hash .= $value->getHash();
-            } else {
-                $hash .= md5(trim($value));
-            }
-        }
-        $this->hash=md5($hash);
-    }
 
     public function toArray()
     {
@@ -113,5 +105,20 @@ class Json
 
         return $ret;
 
+    }
+
+    private function reHash()
+    {
+        $hash = "";
+        foreach ($this->getKeys() as $key) {
+            $hash .= md5($key);
+            $value = $this->getKey($key);
+            if ($value instanceof Json) {
+                $hash .= $value->getHash();
+            } else {
+                $hash .= md5(trim($value));
+            }
+        }
+        $this->hash = md5($hash);
     }
 }

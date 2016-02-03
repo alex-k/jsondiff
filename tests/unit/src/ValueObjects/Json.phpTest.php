@@ -58,4 +58,21 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($json->keyExists("c"));
     }
 
+
+    public function testSubTreeCreation()
+    {
+
+        $string = '{"a":1,"b":{"c":2},"c":{"c":2}}';
+        $json = \JsonDiff\ValueObjects\Json::fromString($string);
+        $this->assertTrue($json->keyExists("a"));
+        $this->assertTrue($json->keyExists("b"));
+        $this->assertTrue($json->keyExists("c"));
+
+        $this->assertTrue($json->getKey("c")->keyExists("c"));
+        $this->assertEquals(2, $json->getKey("c")->getKey("c"));
+        $this->assertEquals($json->getKey("b")->getHash(), $json->getKey("c")->getHash());
+
+        $this->assertEquals($string,json_encode($json->toArray()));
+    }
+
 }

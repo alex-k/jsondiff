@@ -22,7 +22,6 @@ class Json implements ComparatorInterface
         $ret=JsonObject::fromString("{}");
 
         foreach ($second->getKeys() as $key) {
-            var_dump($key);
             $value=$second->getKey($key);
             if (!$first->keyExists($key)) {
                 $ret->setValue($key,$value);
