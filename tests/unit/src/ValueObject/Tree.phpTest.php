@@ -55,6 +55,14 @@ class TreeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(4, $tree->getKey("c"));
     }
 
+
+    public function testToNullArray()
+    {
+        $tree = Tree::fromArray([]);
+        $this->assertNull($tree->toArray();
+    }
+
+
     public function testSubTreeCreation()
     {
         $arr = ["a" => 1, "b" => ["c" => 2], "c" => ["c" => 2]];
