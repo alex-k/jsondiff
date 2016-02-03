@@ -12,16 +12,16 @@ namespace JsonDiff\Comparator;
 use JsonDiff\ValueObject\TreeInterface;
 use JsonDiff\ValueObject\Json as JsonObject;
 
-class Json implements DiffTreeInterface
+class JsonDiff implements DiffInterface
 {
-    /** @var  DiffTreeInterface */
+    /** @var  DiffInterface */
     private $comparator;
 
     /**
      * Json constructor.
-     * @param DiffTreeInterface $comparator
+     * @param DiffInterface $comparator
      */
-    public function __construct(DiffTreeInterface $comparator)
+    public function __construct(DiffInterface $comparator)
     {
         $this->comparator = $comparator;
     }

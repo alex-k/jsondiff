@@ -6,12 +6,12 @@ use JsonDiff\ValueObject\Json as JsonObject;
 
 class JsonComparatorTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var  Tree */
+    /** @var  TreeDiff */
     private $comparator;
 
     protected function setUp()
     {
-        $this->comparator = new Json(new Tree());
+        $this->comparator = new JsonDiff(new TreeDiff());
 
     }
 

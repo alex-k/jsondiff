@@ -9,7 +9,7 @@ namespace JsonDiff\Comparator;
 
 use JsonDiff\ValueObject\TreeInterface;
 
-interface DiffTreeInterface
+interface DiffInterface
 {
     public function diff(TreeInterface $first, TreeInterface $second);
 }

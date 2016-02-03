@@ -14,7 +14,7 @@ require_once("vendor".DIRECTORY_SEPARATOR."autoload.php");
 $first = JsonDiff\ValueObject\Json::fromString('{ "foo":{ "bar":"baz", "biz":"foo" }, "fiz":{ "foo":"baz" }, "bar":"baz", "baz":[ "foo", "bar" ] }');
 $second = JsonDiff\ValueObject\Json::fromString('{ "foo":{ "bar":"baz1", "biz":"foo" }, "fiz":{ "foo":"baz" }, "bar":"baz", "baz":[ "foo1" ] }');
 
-$comparator = new \JsonDiff\Comparator\Tree();
+$comparator = new \JsonDiff\Comparator\TreeDiff();
 $diff = $comparator->diff($first, $second);
 
 echo json_encode($first->toArray()), PHP_EOL;
