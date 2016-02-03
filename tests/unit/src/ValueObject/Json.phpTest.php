@@ -1,5 +1,6 @@
 <?php
-namespace src\ValueObjects;
+namespace JsonDiff\ValueObject;
+
 
 class JsonTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,7 +17,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithNonStringAsArgument()
     {
-        $json = \JsonDiff\ValueObjects\Json::fromString(Array());
+        $json = Json::fromString(Array());
     }
 
     /**
@@ -24,12 +25,12 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithInvalidJson()
     {
-        $json = \JsonDiff\ValueObjects\Json::fromString('[a,b,]');
+        $json = Json::fromString('[a,b,]');
     }
 
     public function testGetKeys()
     {
-        $json = \JsonDiff\ValueObjects\Json::fromString('{"a":1,"b":2}');
+        $json = Json::fromString('{"a":1,"b":2}');
 
         $this->assertEquals(["a","b"],$json->getKeys());
 
@@ -37,7 +38,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
     public function testGetKey()
     {
-        $json = \JsonDiff\ValueObjects\Json::fromString('{"a":1,"b":2}');
+        $json = Json::fromString('{"a":1,"b":2}');
         $this->assertEquals(2,$json->getKey("b"));
     }
 
@@ -46,14 +47,14 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUnexistedKey()
     {
-        $json = \JsonDiff\ValueObjects\Json::fromString('{"a":1,"b":2}');
+        $json = Json::fromString('{"a":1,"b":2}');
         $json->getKey("c");
     }
 
 
     public function testKeyExists()
     {
-        $json = \JsonDiff\ValueObjects\Json::fromString('{"b":2}');
+        $json = Json::fromString('{"b":2}');
         $this->assertTrue($json->keyExists("b"));
         $this->assertFalse($json->keyExists("c"));
     }
@@ -63,7 +64,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     {
 
         $string = '{"a":1,"b":{"c":2},"c":{"c":2}}';
-        $json = \JsonDiff\ValueObjects\Json::fromString($string);
+        $json = Json::fromString($string);
         $this->assertTrue($json->keyExists("a"));
         $this->assertTrue($json->keyExists("b"));
         $this->assertTrue($json->keyExists("c"));
@@ -72,7 +73,8 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, $json->getKey("c")->getKey("c"));
         $this->assertEquals($json->getKey("b")->getHash(), $json->getKey("c")->getHash());
 
-        $this->assertEquals($string,json_encode($json->toArray()));
+        $this->assertEquals(json_decode($string,true),$json->toArray());
+        $this->assertEquals($string,$json->toString());
     }
 
 }

@@ -2,44 +2,34 @@
 /**
  * Created by PhpStorm.
  * User: alexk
- * Date: 2/2/16
- * Time: 10:00 PM
+ * Date: 2/3/16
+ * Time: 10:23 PM
  */
 
-namespace JsonDiff\Comparator;
+namespace Comparator;
 
-use JsonDiff\ValueObjects\Json as JsonObject;
 
-class Json implements ComparatorInterface
+use JsonDiff\Comparator\DiffTreeInterface;
+use JsonDiff\ValueObject\TreeInterface;
+use JsonDiff\ValueObject\Json as JsonObject;
+
+class Json implements DiffTreeInterface
 {
+    /** @var  DiffTreeInterface */
+    private $comparator;
+
     /**
-     * @param JsonObject $first
-     * @param JsonObject $second
-     * @return JsonObject
+     * Json constructor.
+     * @param DiffTreeInterface $comparator
      */
-    public function diff(JsonObject $first, JsonObject $second)
+    public function __construct(DiffTreeInterface $comparator)
     {
-        $ret=JsonObject::fromString("{}");
-
-        foreach ($second->getKeys() as $key) {
-            $value=$second->getKey($key);
-            if (!$first->keyExists($key)) {
-                $ret->setValue($key,$value);
-            } else if ($value instanceof JsonObject) {
-                $firstValue=$first->getKey($key);
-                if ($firstValue instanceof JsonObject) {
-                    if($value->getHash() != $firstValue->getHash()) {
-                        $ret->setValue($key,$this->diff($firstValue,$value));
-                    }
-                } else {
-                    $ret->setValue($key,$value);
-                }
-            } else if ($first->getKey($key) != $value) {
-                $ret->setValue($key,$value);
-            }
-        }
-
-        return $ret;
+        $this->comparator = $comparator;
     }
 
+
+    public function diff(TreeInterface $first, TreeInterface $second)
+    {
+        return JsonObject::fromTree($this->comparator->diff($first, $second));
+    }
 }

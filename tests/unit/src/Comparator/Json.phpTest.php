@@ -2,16 +2,17 @@
 namespace JsonDiff\Comparator;
 
 
-use JsonDiff\ValueObjects\Json as JsonObject;
+//use Comparator\Json;
+use JsonDiff\ValueObject\Json as JsonObject;
 
 class JsonComparatorTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var  Json */
+    /** @var  Tree */
     private $comparator;
 
     protected function setUp()
     {
-        $this->comparator = new Json();
+        $this->comparator = new Tree();
 
     }
 

@@ -11,10 +11,10 @@ chdir(dirname(__DIR__));
 require_once("vendor".DIRECTORY_SEPARATOR."autoload.php");
 
 
-$first = JsonDiff\ValueObjects\Json::fromString('{ "foo":{ "bar":"baz", "biz":"foo" }, "fiz":{ "foo":"baz" }, "bar":"baz", "baz":[ "foo", "bar" ] }');
-$second = JsonDiff\ValueObjects\Json::fromString('{ "foo":{ "bar":"baz1", "biz":"foo" }, "fiz":{ "foo":"baz" }, "bar":"baz", "baz":[ "foo1" ] }');
+$first = JsonDiff\ValueObject\Json::fromString('{ "foo":{ "bar":"baz", "biz":"foo" }, "fiz":{ "foo":"baz" }, "bar":"baz", "baz":[ "foo", "bar" ] }');
+$second = JsonDiff\ValueObject\Json::fromString('{ "foo":{ "bar":"baz1", "biz":"foo" }, "fiz":{ "foo":"baz" }, "bar":"baz", "baz":[ "foo1" ] }');
 
-$comparator = new \JsonDiff\Comparator\Json();
+$comparator = new \JsonDiff\Comparator\Tree();
 $diff = $comparator->diff($first, $second);
 
 echo json_encode($first->toArray()), PHP_EOL;
