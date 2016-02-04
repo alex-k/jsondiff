@@ -6,16 +6,16 @@
  * Time: 10:00 PM
  */
 
-namespace JsonDiff\Comparator;
+namespace JsonDiff\Comparator\Diff;
 
 use JsonDiff\DataProvider\Arr;
-use JsonDiff\ValueObject\Tree\Tree;
+use JsonDiff\ValueObject\Tree\Tree as TreeObject;
 
-class TreeDiff implements DiffInterface
+class Tree implements DiffInterface
 {
-    public function diff(Tree $first, Tree $second)
+    public function diff(TreeObject $first, TreeObject $second)
     {
-        $ret = Tree::createFrom(new Arr([]));
+        $ret = TreeObject::createFrom(new Arr([]));
 
         foreach ($second->getKeys() as $key) {
 
@@ -24,7 +24,7 @@ class TreeDiff implements DiffInterface
             if (!$first->keyExists($key)) {
                 $ret->setValue($key, $value);
 
-            } else if ($value instanceof Tree) {
+            } else if ($value instanceof TreeObject) {
 
                 $subTree = $first->getKey($key);
                 $this->compareSubTree($subTree, $value, $ret, $key);
@@ -40,14 +40,14 @@ class TreeDiff implements DiffInterface
     }
 
     /**
-     * @param Tree $subTree
-     * @param Tree $value
-     * @param Tree $ret
+     * @param TreeObject $subTree
+     * @param TreeObject $value
+     * @param TreeObject $ret
      * @param $key
      */
-    private function compareSubTree($subTree, Tree $value, &$ret, $key)
+    private function compareSubTree($subTree, TreeObject $value, &$ret, $key)
     {
-        if ($subTree instanceof Tree) {
+        if ($subTree instanceof TreeObject) {
             if ($value->getHash() != $subTree->getHash()) {
                 $ret->setValue($key, $this->diff($subTree, $value));
             }
