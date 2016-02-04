@@ -6,12 +6,12 @@
  * Time: 6:15 PM
  */
 
-namespace JsonDiff\DataProvider;
+namespace JsonDiff\DataProvider\DummyArray;
 
 use JsonDiff\ValueObject\Tree\ExportInterface;
 use JsonDiff\ValueObject\Tree\ImportInterface;
 
-class Arr implements ImportInterface, ExportInterface
+class Provider implements ImportInterface, ExportInterface
 {
     /** @var  array */
     private $data;

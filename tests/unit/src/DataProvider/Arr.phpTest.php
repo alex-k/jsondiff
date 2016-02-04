@@ -1,5 +1,5 @@
 <?php
-namespace JsonDiff\DataProvider;
+namespace JsonDiff\DataProvider\DummyArray;
 
 class ArrTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,7 +14,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase
     public function testArr()
     {
         $data = ["a" => "b"];
-        $provider = new Arr($data);
+        $provider = new Provider($data);
         $this->assertEquals($data, $provider->getDataAsArray());
         $this->assertEquals($data, $provider->exportFromArray($data));
     }

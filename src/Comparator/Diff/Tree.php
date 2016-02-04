@@ -8,14 +8,14 @@
 
 namespace JsonDiff\Comparator\Diff;
 
-use JsonDiff\DataProvider\Arr;
+use JsonDiff\DataProvider\DummyArray\Provider;
 use JsonDiff\ValueObject\Tree\Tree as TreeObject;
 
 class Tree implements DiffInterface
 {
     public function diff(TreeObject $first, TreeObject $second)
     {
-        $ret = TreeObject::createFrom(new Arr([]));
+        $ret = TreeObject::createFrom(new Provider([]));
 
         foreach ($second->getKeys() as $key) {
 
