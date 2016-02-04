@@ -1,5 +1,5 @@
 <?php
-namespace JsonDiff\Comparator\Diff;
+namespace JsonDiff\Comparator\Diff\Tree;
 
 
 use JsonDiff\DataProvider\DummyArray\Provider;

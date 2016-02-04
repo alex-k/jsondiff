@@ -6,8 +6,9 @@
  * Time: 10:00 PM
  */
 
-namespace JsonDiff\Comparator\Diff;
+namespace JsonDiff\Comparator\Diff\Tree;
 
+use JsonDiff\Comparator\Diff\DiffInterface;
 use JsonDiff\DataProvider\DummyArray\Provider;
 use JsonDiff\ValueObject\Tree\Tree as TreeObject;
 

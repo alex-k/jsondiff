@@ -12,7 +12,7 @@ require_once("vendor".DIRECTORY_SEPARATOR."autoload.php");
 
 use JsonDiff\ValueObject\Tree\Tree as TreeObject;
 use JsonDiff\DataProvider\Json\Import as JsonProvider;
-use JsonDiff\Comparator\Diff\Tree as Comparator;
+use JsonDiff\Comparator\Diff\Tree\Tree as Comparator;
 use JsonDiff\DataProvider\Json\Export as JsonExporter;
 
 
