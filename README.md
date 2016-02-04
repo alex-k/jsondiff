@@ -24,13 +24,15 @@
 
 **Data structure and patterns**
 
-  I've choose to introduce Tree-kind ValueObject to parse json-encoded strings into. Tree Objects knows nothing about jsons, it's initialized from Array.
-  Every Tree VO contains hash of values, values could be primitives or objects of TreeVO class, which reflects subtrees.
-  Every TreeVO contains Hash, which dependent on Tree values and will be used for easy compare of subtrees.
+  I've choose to introduce Tree-kind ValueObject named Tree to store and operate data.
+  Every Tree object stores set of key-values, values could be primitives or objects of Tree class, which reflects subtrees.
+  Every Tree object contains Hash value, which dependent on Tree values and will be used for objects compare.
 
-  I've created Json VO which acts as facade and decorator in front of Tree VO to implement parsing from and to Json strings.
-  I've decided to parse json's completely to simplify the task since expected size of json's was not reflected in the requirements.
+  Next, I've created TreeDiff comparator. It contains diff() method, which recieves two Tree objects.
+  The diff() method returns new Tree object which represents the difference between arguments.
 
-  Next, I've created TreeDiff comparator, It iterates throw values of the second provided VO and fill result diff object with the values
-  which differs from values in the first object. It iterator find subtrees as values og VO it recursively compares them using their Hashes.
+  It's implemented as an iteration throw the values of Tree objects, comparing values (Hashes are used at this point)
+  and filling the result object. If the iterator detects subtree at a some point, it will recursively compares subtrees.
 
+  I could not specify any specific pattern which leads my solution at this point, but I tried to follow the SOLID principle.
+  I've created some set of unit tests (one of them is actually an acceptance from my point).
