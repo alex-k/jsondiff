@@ -107,7 +107,7 @@ class Tree
     /**
      * @return array|null
      */
-    public function toArray()
+    private function toArray()
     {
         if (!$this->getKeys()) {
             return null;

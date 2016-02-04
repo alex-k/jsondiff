@@ -5,8 +5,11 @@ use JsonDiff\DataProvider\DummyArray\Provider;
 
 class TreeTest extends \PHPUnit_Framework_TestCase
 {
+    private $exporter;
+
     protected function setUp()
     {
+        $this->exporter = new Provider([]);
     }
 
     protected function tearDown()
@@ -61,7 +64,7 @@ class TreeTest extends \PHPUnit_Framework_TestCase
     public function testToNullArray()
     {
         $tree = Tree::createFrom(new Provider([]));
-        $this->assertNull($tree->toArray());
+        $this->assertNull($tree->exportWith($this->exporter));
     }
 
 
@@ -77,7 +80,7 @@ class TreeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, $tree->getKey("c")->getKey("c"));
         $this->assertEquals($tree->getKey("b")->getHash(), $tree->getKey("c")->getHash());
 
-        $this->assertEquals($arr, $tree->toArray());
+        $this->assertEquals($arr, $tree->exportWith($this->exporter));
     }
 
 }
