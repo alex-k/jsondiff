@@ -26,4 +26,20 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('{"a":"b"}', $exporter->exportFromArray(["a"=>"b"]));
     }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidArgument()
+    {
+        new Import([]);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidJson()
+    {
+        new Import('{"a":"b" "c":"d"}');
+    }
 }
