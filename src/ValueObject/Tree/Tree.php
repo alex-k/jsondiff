@@ -6,10 +6,11 @@
  * Time: 10:01 PM
  */
 
-namespace JsonDiff\ValueObject;
+namespace JsonDiff\ValueObject\Tree;
 
 
-class Tree implements TreeInterface
+
+class Tree
 {
     private $data;
     private $hash = "";
@@ -24,6 +25,20 @@ class Tree implements TreeInterface
     }
 
     /**
+     * @param ImportInterface $provider
+     * @return Tree
+     */
+    public static function createFrom(ImportInterface $provider)
+    {
+        return self::fromArray($provider->getDataAsArray());
+    }
+
+    public function exportWith(ExportInterface $exporter)
+    {
+        return $exporter->exportFromArray($this->toArray());
+    }
+
+    /**
      * @return string
      */
     public function getHash()
@@ -31,11 +46,12 @@ class Tree implements TreeInterface
         return $this->hash;
     }
 
+
     /**
      * @param $arr
      * @return Tree
      */
-    public static function fromArray($arr)
+    private static function fromArray($arr)
     {
         $ret=new self([]);
 
@@ -100,7 +116,7 @@ class Tree implements TreeInterface
         $ret=[];
         foreach ($this->getKeys() as $key) {
             $value =$this->getKey($key);
-            if ($value instanceof TreeInterface) {
+            if ($value instanceof Tree) {
                 $ret[$key] = $value->toArray();
             } else {
                 $ret[$key] = $value;
@@ -117,7 +133,7 @@ class Tree implements TreeInterface
         foreach ($this->getKeys() as $key) {
             $hash .= md5($key);
             $value = $this->getKey($key);
-            if ($value instanceof TreeInterface) {
+            if ($value instanceof Tree) {
                 $hash .= $value->getHash();
             } else {
                 $hash .= md5(trim($value));

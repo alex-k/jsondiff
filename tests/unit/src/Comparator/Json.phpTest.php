@@ -2,7 +2,9 @@
 namespace JsonDiff\Comparator;
 
 
-use JsonDiff\ValueObject\Json as JsonObject;
+use JsonDiff\DataProvider\Json\Export as JsonExport;
+use JsonDiff\DataProvider\Json\Import as JsonImport;
+use JsonDiff\ValueObject\Tree\Tree;
 
 class JsonComparatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,7 +13,7 @@ class JsonComparatorTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->comparator = new JsonDiff(new TreeDiff());
+        $this->comparator = new TreeDiff();
 
     }
 
@@ -19,15 +21,15 @@ class JsonComparatorTest extends \PHPUnit_Framework_TestCase
     {
     }
 
-
     public function testReferenceJsons()
     {
-        $first = JsonObject::fromString('{ "foo":{ "bar":"baz", "biz":"foo" }, "fiz":{ "foo":"baz" }, "bar":"baz", "baz":[ "foo", "bar" ] }');
-        $second = JsonObject::fromString('{ "foo":{ "bar":"baz1", "biz":"foo" }, "fiz":{ "foo":"baz" }, "bar":"baz", "baz":[ "foo1" ] }');
+        $first = Tree::createFrom(new JsonImport('{ "foo":{ "bar":"baz", "biz":"foo" }, "fiz":{ "foo":"baz" }, "bar":"baz", "baz":[ "foo", "bar" ] }'));
+        $second = Tree::createFrom(new JsonImport('{ "foo":{ "bar":"baz1", "biz":"foo" }, "fiz":{ "foo":"baz" }, "bar":"baz", "baz":[ "foo1" ] }'));
+
 
         $diff = $this->comparator->diff($first, $second);
 
-        $this->assertEquals('{"foo":{"bar":"baz1"},"baz":["foo1"]}', $diff->toString());
+        $this->assertEquals('{"foo":{"bar":"baz1"},"baz":["foo1"]}', $diff->exportWith(new JsonExport()));
     }
 
 

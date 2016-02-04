@@ -8,14 +8,14 @@
 
 namespace JsonDiff\Comparator;
 
-use JsonDiff\ValueObject\TreeInterface;
-use JsonDiff\ValueObject\Tree as TreeObject;
+use JsonDiff\DataProvider\Arr;
+use JsonDiff\ValueObject\Tree\Tree;
 
 class TreeDiff implements DiffInterface
 {
-    public function diff(TreeInterface $first, TreeInterface $second)
+    public function diff(Tree $first, Tree $second)
     {
-        $ret = TreeObject::fromArray([]);
+        $ret = Tree::createFrom(new Arr([]));
 
         foreach ($second->getKeys() as $key) {
 
@@ -24,7 +24,7 @@ class TreeDiff implements DiffInterface
             if (!$first->keyExists($key)) {
                 $ret->setValue($key, $value);
 
-            } else if ($value instanceof TreeInterface) {
+            } else if ($value instanceof Tree) {
 
                 $subTree = $first->getKey($key);
                 $this->compareSubTree($subTree, $value, $ret, $key);
@@ -40,14 +40,14 @@ class TreeDiff implements DiffInterface
     }
 
     /**
-     * @param $subTree
-     * @param $value
-     * @param $ret
+     * @param Tree $subTree
+     * @param Tree $value
+     * @param Tree $ret
      * @param $key
      */
-    private function compareSubTree($subTree, $value, &$ret, $key)
+    private function compareSubTree($subTree, Tree $value, &$ret, $key)
     {
-        if ($subTree instanceof TreeInterface) {
+        if ($subTree instanceof Tree) {
             if ($value->getHash() != $subTree->getHash()) {
                 $ret->setValue($key, $this->diff($subTree, $value));
             }
