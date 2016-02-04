@@ -34,5 +34,5 @@
   It's implemented as an iteration throw the values of Tree objects, comparing values (Hashes are used at this point)
   and filling the result object. If the iterator detects subtree at a some point, it will recursively compares subtrees.
 
-  I could not specify any specific pattern which leads my solution at this point, but I tried to follow the SOLID principle.
+  I could not specify any specific patterns apart of DI/IC, which leads my solution at this point, but I tried to follow the SOLID principle.
   I've created some set of unit tests (one of them is actually an acceptance from my point).
